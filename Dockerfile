@@ -19,4 +19,4 @@ RUN ls
 # exposing the port for the app
 FROM nginx:stable
 COPY --from=securital /app/securital /usr/share/nginx/html
-EXPOSE 4200
+EXPOSE 80
