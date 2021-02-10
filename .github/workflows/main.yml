@@ -30,7 +30,7 @@ jobs:
       - name: Check dir  
         run: |
           ls -a ${HOME}
-          ls -a ${HOME}/.docker
+          cat ${HOME}/.docker/config.json
 #       - name: Docker Setup QEMU
 #         uses: docker/setup-qemu-action@v1.0.1
   
