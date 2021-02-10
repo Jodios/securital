@@ -26,32 +26,37 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           logout: true
+
+      - name: Check dir  
+        run: |
+          ls ${HOME}
+          ls ${HOME}/snap/docker/471/.docker
+          ls ${HOME}/.docker
+#       - name: Docker Setup QEMU
+#         uses: docker/setup-qemu-action@v1.0.1
   
-      - name: Docker Setup QEMU
-        uses: docker/setup-qemu-action@v1.0.1
-  
-      - name: Docker Setup Buildx
-        uses: docker/setup-buildx-action@v1.1.1
+#       - name: Docker Setup Buildx
+#         uses: docker/setup-buildx-action@v1.1.1
 
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v2.2.2
-        with:
-          push: true 
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/securital:${{ github.run_id }}       
+#       - name: Build and push Docker images
+#         uses: docker/build-push-action@v2.2.2
+#         with:
+#           push: true 
+#           tags: ${{ secrets.DOCKERHUB_USERNAME }}/securital:${{ github.run_id }}       
 
 
-      - name: Replace tokens
-        # You may pin to the exact commit or the version.
-        # uses: cschleiden/replace-tokens@121d9153eda2951d490e9f724a67ff095ab4c4f7
-        uses: cschleiden/replace-tokens@v1.0
-        with:
-          files: kube.yaml
-        env:
-          deployment.image.name: ${{ secrets.DOCKERHUB_USERNAME }}/securital:${{ github.run_id }}
-          config.typeDNA.key: ${{ secrets.TYPE_DNA_KEY }}
-          config.typeDNA.secret: ${{ secrets.TYPE_DNA_SECRET }}
-          config.twitter.key: ${{ secrets.TWITTER_KEY }}
-          config.twitter.secret: ${{ secrets.TWITTER_SECRET }}
+#       - name: Replace tokens
+#         # You may pin to the exact commit or the version.
+#         # uses: cschleiden/replace-tokens@121d9153eda2951d490e9f724a67ff095ab4c4f7
+#         uses: cschleiden/replace-tokens@v1.0
+#         with:
+#           files: kube.yaml
+#         env:
+#           deployment.image.name: ${{ secrets.DOCKERHUB_USERNAME }}/securital:${{ github.run_id }}
+#           config.typeDNA.key: ${{ secrets.TYPE_DNA_KEY }}
+#           config.typeDNA.secret: ${{ secrets.TYPE_DNA_SECRET }}
+#           config.twitter.key: ${{ secrets.TWITTER_KEY }}
+#           config.twitter.secret: ${{ secrets.TWITTER_SECRET }}
 
       - name: Kubernetes CLI - kubectl
         # You may pin to the exact commit or the version.
