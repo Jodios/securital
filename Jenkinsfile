@@ -12,7 +12,7 @@ node {
     }
     
     stage('Replace variables in kube yaml'){
-        variableReplace(
+        contentReplace(
             configs: [
                 variablesReplaceConfig(
                     configs: [
