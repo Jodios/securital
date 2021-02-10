@@ -29,9 +29,8 @@ jobs:
 
       - name: Check dir  
         run: |
-          ls ${HOME}
-          ls ${HOME}/snap/docker/471/.docker
-          ls ${HOME}/.docker
+          ls -a ${HOME}
+          ls -a ${HOME}/.docker
 #       - name: Docker Setup QEMU
 #         uses: docker/setup-qemu-action@v1.0.1
   
@@ -58,14 +57,14 @@ jobs:
 #           config.twitter.key: ${{ secrets.TWITTER_KEY }}
 #           config.twitter.secret: ${{ secrets.TWITTER_SECRET }}
 
-      - name: Kubernetes CLI - kubectl
-        # You may pin to the exact commit or the version.
-        # uses: steebchen/kubectl@8d86812f13f42dbc67dd0ffd787cde5e1833f789
-        uses: steebchen/kubectl@v1.0.0
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-        with:
-          args: apply -f kube.yaml
+#       - name: Kubernetes CLI - kubectl
+#         # You may pin to the exact commit or the version.
+#         # uses: steebchen/kubectl@8d86812f13f42dbc67dd0ffd787cde5e1833f789
+#         uses: steebchen/kubectl@v1.0.0
+#         env:
+#           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+#         with:
+#           args: apply -f kube.yaml
     
     
     
