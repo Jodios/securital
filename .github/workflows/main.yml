@@ -42,7 +42,8 @@ jobs:
         # uses: docker/build-push-action@4a531fa5a603bab87dfa56578bd82b28508c9547
         uses: docker/build-push-action@v2.2.2
         with:
+          push: true 
           # List of metadata for an image
           #labels: # optional
           # List of tags
-          tags: ${{github.run_id}}
+          tags: jodios/securital:${{github.run_id}}
