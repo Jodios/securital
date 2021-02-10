@@ -31,8 +31,8 @@ jobs:
           deployment.image.name: ${{ secrets.DOCKERHUB_USERNAME }}/securital:${{ github.run_id }}
           config.typeDNA.key: ${{ secrets.TYPE_DNA_KEY }}
           config.typeDNA.secret: ${{ secrets.TYPE_DNA_SECRET }}
-          config.twitter.key: ${{ config.twitter.TWITTER_KEY }}
-          config.twitter.secret: ${{ config.twitter.TWITTER_SECRET }}
+          config.twitter.key: ${{ secrets.TWITTER_KEY }}
+          config.twitter.secret: ${{ secrets.TWITTER_SECRET }}
   
 #       - name: Docker Setup QEMU
 #         uses: docker/setup-qemu-action@v1.0.1
