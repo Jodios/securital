@@ -12,33 +12,18 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
+          
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        
-      - name: Replace tokens
-        # You may pin to the exact commit or the version.
-        # uses: cschleiden/replace-tokens@121d9153eda2951d490e9f724a67ff095ab4c4f7
-        uses: cschleiden/replace-tokens@v1.0
-        with:
-          files: kube.yaml
-        env:
-          deployment.image.name: ${{ secrets.DOCKERHUB_USERNAME }}/securital:${{ github.run_id }}
-          config.typeDNA.key: ${{ secrets.TYPE_DNA_KEY }}
-          config.typeDNA.secret: ${{ secrets.TYPE_DNA_SECRET }}
-          config.twitter.key: ${{ secrets.TWITTER_KEY }}
-          config.twitter.secret: ${{ secrets.TWITTER_SECRET }}
   
-#       - name: Docker Setup QEMU
-#         uses: docker/setup-qemu-action@v1.0.1
+      - name: Docker Setup QEMU
+        uses: docker/setup-qemu-action@v1.0.1
   
-#       - name: Docker Setup Buildx
-#         uses: docker/setup-buildx-action@v1.1.1
+      - name: Docker Setup Buildx
+        uses: docker/setup-buildx-action@v1.1.1
           
       - name: Docker Login
         uses: docker/login-action@v1.8.0
@@ -52,4 +37,35 @@ jobs:
         uses: docker/build-push-action@v2.2.2
         with:
           push: true 
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/securital:${{ github.run_id }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/securital:${{ github.run_id }}       
+
+  push:    
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+
+        - name: Replace tokens
+          # You may pin to the exact commit or the version.
+          # uses: cschleiden/replace-tokens@121d9153eda2951d490e9f724a67ff095ab4c4f7
+          uses: cschleiden/replace-tokens@v1.0
+          with:
+            files: kube.yaml
+          env:
+            deployment.image.name: ${{ secrets.DOCKERHUB_USERNAME }}/securital:${{ github.run_id }}
+            config.typeDNA.key: ${{ secrets.TYPE_DNA_KEY }}
+            config.typeDNA.secret: ${{ secrets.TYPE_DNA_SECRET }}
+            config.twitter.key: ${{ secrets.TWITTER_KEY }}
+            config.twitter.secret: ${{ secrets.TWITTER_SECRET }}
+
+        - name: Kubernetes CLI - kubectl
+          # You may pin to the exact commit or the version.
+          # uses: steebchen/kubectl@8d86812f13f42dbc67dd0ffd787cde5e1833f789
+          uses: steebchen/kubectl@v1.0.0
+          env:
+            KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+          with:
+            args: apply -f kube.yaml
+    
+    
+    
+    
