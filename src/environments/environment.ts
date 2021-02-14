@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  typeDNAKey: "1038531155634846a0056ad94f15d885",
+  typeDNASecret: "fb9cf60dd0816d6aa9449646909410f1",
+  twitterKey: "CSl3CsrjnHQLxYfaP3hSBtHIa",
+  twitterSecret: "whF21mZSdORDrmdpod1A3rcLLx2Y26MDNJbX3fwLeEFw0HwBcT",
+  twitterBearerToken: "AAAAAAAAAAAAAAAAAAAAACEfMwEAAAAAQwQFPbDohlaJce%2FOjXgWnweHJnY%3DVpVrRHDBHIb5BCwVW35uGPAevRxZ7QbxepkVtGgZ7m20mDMUbA"
 };
 
 /*
