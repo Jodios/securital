@@ -4,26 +4,28 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { TwitterService } from './services/twitter/twitter.service';
-import { LoginComponent } from './login/login.component';
-import { TwitterFeedComponent } from './twitter-feed/twitter-feed.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { TypingDNAService } from './services/typingDNA/typing-dna.service';
+import { TweetComponent } from './tweet/tweet.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
-    TwitterFeedComponent,
-    NavbarComponent
+    TweetComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [TwitterService],
+  providers: [
+    TwitterService,
+    TypingDNAService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
