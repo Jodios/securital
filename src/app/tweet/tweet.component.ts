@@ -26,8 +26,12 @@ export class TweetComponent implements OnInit {
       JSON.parse(localStorage.getItem("userAuth"))["screen_name"],
       p
     ).toPromise().then((r) => {
-      // we need to get the result from r, then if it's 1, send the tweet :)
-      console.log(r);
+      if (r['result'] == 1) {
+        let user = JSON.parse(localStorage.getItem("userAuth"));
+        this.twitterService.postTweet(user["oauth_token"],user["oauth_token_secret"],user["user_id"],user["screen_name"],this.tweetText).toPromise()
+      } else {
+        alert("Typing Pattern does not match! Try typing out your tweet again.");
+      }
       this.tdna.reset();
       this.tweetText = "";
     });

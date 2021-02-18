@@ -9,12 +9,14 @@ import { HomeComponent } from './home/home.component';
 import { TwitterService } from './services/twitter/twitter.service';
 import { TypingDNAService } from './services/typingDNA/typing-dna.service';
 import { TweetComponent } from './tweet/tweet.component';
+import { OnboardingComponent } from './onboarding/onboarding.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    TweetComponent
+    TweetComponent,
+    OnboardingComponent
   ],
   imports: [
     BrowserModule,

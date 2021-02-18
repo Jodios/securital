@@ -8,6 +8,7 @@ import {Md5} from 'ts-md5/dist/md5'
 export class TypingDNAService {
   base_url = "http://192.53.165.83:30666";
   auto_url = "/typingdna";
+  get_user_url = "/typingdna/getUser";
 
   constructor(private http: HttpClient) {}
 
@@ -16,6 +17,13 @@ export class TypingDNAService {
     return this.http.post(this.base_url+this.auto_url, {
       id: idHash,
       tp: typingPattern
+    });
+  }
+
+  public getUser(idBeforeHash: string) {
+    let idHash = this.hashID(idBeforeHash);
+    return this.http.post(this.base_url+this.get_user_url, {
+      id: idHash 
     });
   }
 

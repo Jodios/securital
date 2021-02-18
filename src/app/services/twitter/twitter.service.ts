@@ -18,7 +18,8 @@ export class TwitterService {
   constructor(private http: HttpClient) {}
 
   public login(){
-    return this.http.post(this.base_url+this.login_url, {});
+    let query = "?oauth_callback=" + encodeURIComponent(window.location.href);
+    return this.http.post(this.base_url+this.login_url+query, {});
   }
 
   public getAccess(oauthToken: string, oauthVerifier: string) {
@@ -41,6 +42,6 @@ export class TwitterService {
       user_id: userID,
       screen_name: screenName,
       tweet: tweetText
-  });
+    });
   }
 }
