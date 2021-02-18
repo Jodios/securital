@@ -9,9 +9,13 @@ import { TwitterService } from '../services/twitter/twitter.service';
 })
 export class NavbarComponent implements OnInit {
   redirectURL = "https://api.twitter.com/oauth/authenticate?oauth_token=";
-  isLoggedIn = this.twitterService.isLoggedIn();
+  isLoggedIn = false;
 
-  constructor(private twitterService: TwitterService, private router: Router) { }
+  constructor(private twitterService: TwitterService, private router: Router) { 
+    this.twitterService.loggedInObservable.subscribe(b => {
+      this.isLoggedIn = b;
+    })
+  }
 
   ngOnInit(): void {
   }
@@ -20,13 +24,13 @@ export class NavbarComponent implements OnInit {
     this.twitterService.login().toPromise().then(x => {
       window.location.href=this.redirectURL+x["oauth_token"];
     }).then(() => {
-      this.isLoggedIn = true;
+      this.twitterService.loggedInObservable.next(true);
     })
   }
 
   logout(){
     localStorage.removeItem("userAuth");
-    this.isLoggedIn = false;
+    this.twitterService.loggedInObservable.next(false);
     this.router.navigate(["/"]);
   }
 

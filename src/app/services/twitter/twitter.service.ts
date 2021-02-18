@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Observer, Subject } from "rxjs";
+import { Observable, Observer, Subject, BehaviorSubject } from "rxjs";
 import * as stomp from "@stomp/stompjs";
 import * as SockJS from "sockjs-client";
 import { Client } from '@stomp/stompjs';
@@ -19,8 +19,13 @@ export class TwitterService {
   get_access_url = "/twitter/getAccess";
   post_tweet_url = "/twitter/postTweet";
   socket: WebSocket;
+  isLoggedIn: boolean;
+  loggedInObservable: BehaviorSubject<boolean>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.isLoggedIn = localStorage.getItem("userAuth") ? true : false;;
+    this.loggedInObservable = new BehaviorSubject<boolean>(this.isLoggedIn);
+  }
 
   public login(){
     let query = "?oauth_callback=" + encodeURIComponent(window.location.href);
@@ -48,10 +53,6 @@ export class TwitterService {
       screen_name: screenName,
       tweet: tweetText
     });
-  }
-
-  public isLoggedIn(){
-    return localStorage.getItem("userAuth") ? true : false;
   }
 
   public getFeed(){

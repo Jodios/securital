@@ -24,12 +24,13 @@ export class HomeComponent implements OnInit {
       twitterService.getAccess(oauthToken, oauthVerifier).toPromise().then(async user => {
         localStorage.setItem("userAuth", JSON.stringify(user)); // store the user
         this.isLoggedIn = true;
-        this.userIsOnboarded().then((res) => { // check if we're onboarded
-          if (!res) {
-            this.router.navigate(['/onboard']);// if onboarded, we tweet
-          } 
-        });
-
+        // this.userIsOnboarded().then((res) => { // check if we're onboarded
+        //   if (!res) {
+        //     this.router.navigate(['/onboard']);// if onboarded, we tweet
+        //   } 
+        // });
+        this.router.navigate(["/"])
+        this.twitterService.loggedInObservable.next(true);
       }).catch(() => {
         alert("Uh oh! Something went oopies!");
         this.router.navigate(['/']);
@@ -38,7 +39,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.twitterService.isLoggedIn();
+    this.twitterService.loggedInObservable.subscribe(b => {
+      this.isLoggedIn = b;
+    })
   }
 
   async userIsOnboarded(): Promise<boolean> {
