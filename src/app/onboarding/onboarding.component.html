@@ -1,0 +1,7 @@
+<p>You need to enter 3 prompts, so that we can get your typing patterns. Don't worry about typing everything 100% correct.</p>
+<div>
+    <p>Prompt {{promptIndex + 1}} :</p>
+    <p>{{prompts[promptIndex]}}</p>
+    <input type="text" (focus)="startRecording()" (focusout)="pauseRecording()" [(ngModel)]="userInput"/>
+    <button (click)="verify()">Submit</button>
+</div>

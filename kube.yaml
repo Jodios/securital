@@ -1,39 +1,39 @@
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: securitalConfigMap
-  namespace: prod
-data:
-  typeDNAKey: #{config.typeDNA.key}#
-  typeDNASecret: #{config.typeDNA.secret}#
-  twitterKey: #{config.twitter.key}#
-  twitterSecret: #{config.twitter.secret}#
+# kind: ConfigMap
+# apiVersion: v1
+# metadata:
+#   name: securitalConfigMap
+#   namespace: prod
+# data:
+#   typeDNAKey: #{config.typeDNA.key}#
+#   typeDNASecret: #{config.typeDNA.secret}#
+#   twitterKey: #{config.twitter.key}#
+#   twitterSecret: #{config.twitter.secret}#
 ---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: configmapdemo
+  name: securital
   namespace: prod
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: configmapdemo
+      app: securital
   template:
     metadata:
       labels:
-        app: configmapdemo 
+        app: securital 
     spec:
       containers:
-        - name: configmapdemo
-          image: #{deployment.image.name}#
+        - name: securital
+          image: jodios/securital:latest #{deployment.image.name}#
           ports:
             - name: http-api
               containerPort: 80
               protocol: TCP
-          envFrom:
-            - configMapRef:
-                name: securitalConfigMap
+          # envFrom:
+          #   - configMapRef:
+          #       name: securitalConfigMap
           resources:
             limits:
               cpu: 500m
@@ -55,7 +55,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: configmapdemo
+  name: securital
   namespace: prod
   labels:
     version: 0.1.203643-1
@@ -64,6 +64,6 @@ spec:
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 30421
+      nodePort: 30425
   selector:
-    app: configmapdemo
+    app: securital
