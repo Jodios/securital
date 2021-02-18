@@ -1,2 +1,2 @@
-<input type="text" (focus)="startRecording()" (focusout)="pauseRecording()" [(ngModel)]="tweetText">
-<button id="twitterLogin" (click)="verifyThenTweet()">Send Tweet</button>
+<textarea (focus)="startRecording()" (focusout)="pauseRecording()" [(ngModel)]="tweetText"></textarea><br>
+<button id="twitterLogin" (click)="verifyThenTweet()" class="btn btn-primary">Send Tweet</button>

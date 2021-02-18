@@ -4,4 +4,34 @@
 body{
     color: white;
     background-color: rgb(25, 39, 52);
+    padding: 10px;
+}
+.wrapper{
+    padding:10px;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+}
+
+.main{
+    text-align: center;
+    padding: 10px;
+    border-left-style: solid;
+    border-left-color: rgb(23, 24, 26);
+    border-right-style: solid;
+    border-right-color: rgb(23, 24, 26);
+}
+.right{
+    padding: 10px;
+}
+button{
+    margin:10px;
+}
+
+.btn-primary{
+    background-color: #008cff;
+    border:none;
+}
+.btn-primary:hover{
+    background-color: #0074d3;
+    border:none;
 }

@@ -10,13 +10,17 @@ import { TwitterService } from './services/twitter/twitter.service';
 import { TypingDNAService } from './services/typingDNA/typing-dna.service';
 import { TweetComponent } from './tweet/tweet.component';
 import { OnboardingComponent } from './onboarding/onboarding.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FeedComponent } from './feed/feed.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     TweetComponent,
-    OnboardingComponent
+    OnboardingComponent,
+    NavbarComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,

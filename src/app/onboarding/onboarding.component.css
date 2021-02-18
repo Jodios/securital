@@ -1,0 +1,21 @@
+textarea{
+    width: 60%;
+    margin:auto;
+}
+.main{
+    border: none;
+}
+input, 
+input:focus{
+    border-radius: 0;
+    border-width: 1px;
+    -webkit-box-shadow: 0 0 0 30px rgb(29, 31, 33) inset !important;
+    color: white;
+}
+input:focus, textarea:focus{    
+    border-color: rgb(0, 140, 255);
+}
+textarea, textarea:focus{
+    background-color:rgb(29, 31, 33);
+    color:white;
+}

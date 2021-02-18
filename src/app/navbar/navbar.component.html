@@ -1,0 +1,14 @@
+<nav class="navbar navbar-expand-lg sticky-top mainColor ">
+    
+    <a routerLink="/" class="navbar-brand" >
+        <!-- <img src="../../assets/icon.svg"> -->
+        <img src="favicon.ico" alt="">
+    </a>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+        <button id="twitterLogin" (click)="login()" *ngIf="!isLoggedIn" class="btn btn-primary">Login Twitter</button>
+        <button id="twitterLogin" (click)="logout()" *ngIf="isLoggedIn" class="btn btn-primary">Logout</button>
+    
+    </div>
+</nav>

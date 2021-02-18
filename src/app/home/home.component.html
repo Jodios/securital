@@ -1,3 +1,8 @@
-<p>
-    <button id="twitterLogin" (click)="login()">Login Twitter</button>
-</p> 
+<div class="wrapper">
+    <div class="left"></div>
+    <div class="main">
+        <app-tweet *ngIf="isLoggedIn"></app-tweet>
+        <app-feed></app-feed>
+    </div>
+    <div class="right"></div>
+</div>

@@ -12,9 +12,10 @@ declare var TypingDNA: any;
 export class OnboardingComponent implements OnInit {
   promptIndex = 0;
   prompts = [
-    "A favorite copy set by writing teachers for their pupils is the following, because it contains every letter of the alphabet: A quick brown fox jumps over the lazy dog.",
+    "A favorite copy set by writing teachers for their pupils is the following, because it contains every letter of the alphabet.",
     "Shoot for the moon, even if you miss, you'll land among the stars.",
-    "Money is a strange business. People who haven't got it aim it strongly. People who have are full of troubles."
+    "Money is a strange business. People who haven't got it aim it strongly.",
+    "Barry, why don't you use the stairs? Your father paid good money for those."
   ];
   currentPrompt = "";
   tdna: any;
@@ -41,7 +42,7 @@ export class OnboardingComponent implements OnInit {
       this.tdna.reset();
       this.userInput = "";
       if (this.promptIndex == 3) {
-        this.router.navigate(["/tweet"]);
+        this.router.navigate(["/"]);
       }
     });
 

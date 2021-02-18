@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { Observable, Observer, Subject } from "rxjs";
+import * as stomp from "@stomp/stompjs";
+import * as SockJS from "sockjs-client";
+import { Client } from '@stomp/stompjs';
 
 /**
  * Used to contact both our custom backend, and the Twitter API
@@ -14,6 +18,7 @@ export class TwitterService {
   login_url = "/twitter/login";
   get_access_url = "/twitter/getAccess";
   post_tweet_url = "/twitter/postTweet";
+  socket: WebSocket;
 
   constructor(private http: HttpClient) {}
 
@@ -44,4 +49,19 @@ export class TwitterService {
       tweet: tweetText
     });
   }
+
+  public isLoggedIn(){
+    return localStorage.getItem("userAuth") ? true : false;
+  }
+
+  public getFeed(){
+    // return new Observable<Client>(obs => {
+    //   const connection = stomp.Stomp.over(new SockJS(this.base_url));
+    //   connection.connect({}, () => {
+    //     obs.next(connection);
+    //   })
+    //   return () => connection.disconnect(null);
+    // })
+  }
+
 }

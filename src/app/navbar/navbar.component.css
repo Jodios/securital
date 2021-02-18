@@ -1,0 +1,29 @@
+
+a{
+    cursor: pointer;
+}
+nav{
+    border-bottom-style: solid;
+    border-bottom-color: rgb(23, 24, 26);
+    z-index: 10000;
+}
+nav a{
+    color:rgb(0, 140, 255);
+    border-right-style: solid;
+    border-right-color: rgb(23, 24, 26);
+}
+nav a:hover{
+    color:rgb(0, 103, 187);
+}
+
+.navbar-brand{
+    width:10%;
+}
+svg{
+    fill:#008cff;
+}
+svg:hover{
+    fill:#0074d3;
+    box-shadow: #001525 4px 4px;
+    transition: 400ms;
+}

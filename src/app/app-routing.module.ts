@@ -6,7 +6,7 @@ import { TweetComponent } from './tweet/tweet.component';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
-  {path: "tweet", component: TweetComponent},
+  // {path: "tweet", component: TweetComponent},
   {path: "onboard", component: OnboardingComponent}
 ];
 

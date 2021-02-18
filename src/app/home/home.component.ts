@@ -9,7 +9,8 @@ import { TypingDNAService } from '../services/typingDNA/typing-dna.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  redirectURL = "https://api.twitter.com/oauth/authenticate?oauth_token=";
+
+  isLoggedIn:boolean = false;
 
   constructor(
     private twitterService: TwitterService, 
@@ -22,12 +23,11 @@ export class HomeComponent implements OnInit {
       if (!oauthToken || !oauthVerifier) return;
       twitterService.getAccess(oauthToken, oauthVerifier).toPromise().then(async user => {
         localStorage.setItem("userAuth", JSON.stringify(user)); // store the user
+        this.isLoggedIn = true;
         this.userIsOnboarded().then((res) => { // check if we're onboarded
-          if (res) {
-            this.router.navigate(['/tweet']); // if onboarded, we tweet
-          } else {
-            this.router.navigate(['/onboard']); // not onboarded, going to onboard
-          }
+          if (!res) {
+            this.router.navigate(['/onboard']);// if onboarded, we tweet
+          } 
         });
 
       }).catch(() => {
@@ -37,12 +37,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
-
-  login() {
-    this.twitterService.login().toPromise().then(x => {
-      window.location.href=this.redirectURL+x["oauth_token"];
-    });
+  ngOnInit(): void {
+    this.isLoggedIn = this.twitterService.isLoggedIn();
   }
 
   async userIsOnboarded(): Promise<boolean> {
